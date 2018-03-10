@@ -118,9 +118,13 @@ def decimal2text(value, places=2,
     q = decimal.Decimal(10) ** -places
 
     integral, exp = str(value.quantize(q)).split('.')
-    return u'{} {}'.format(
-        num2text(int(integral), int_units),
-        num2text(int(exp), exp_units))
+    
+    if int(exp):
+        return u'{} {}'.format(
+            num2text(int(integral), int_units),
+            num2text(int(exp), exp_units))
+    else:
+        return num2text(int(integral), int_units)
 
 if __name__ == '__main__':
     import sys
